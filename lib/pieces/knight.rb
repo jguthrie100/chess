@@ -2,9 +2,10 @@ require_relative 'piece'
 
 class Knight < Piece
 
-  def initialize(color)
+  def initialize(color, position)
     super
-    @moves = [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]
+    @move_dirs = [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]
+    @attack_move_dirs = @move_dirs
     @repeat_move = false
   end
 end
