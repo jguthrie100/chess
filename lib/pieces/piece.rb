@@ -1,21 +1,20 @@
 require 'byebug'
 
 class Piece
-  attr_reader :move_dirs, :color, :num_moves, :repeat_move, :position
+  attr_reader :move_dirs, :attack_move_dirs, :color, :move_count, :repeat_move, :position
 
   def initialize(color, position)
-    unless [:black, :white].include?(color) && position =~ /^[A-H][1-8]$/
-      throw ArgumentError
-    end
+    raise ArgumentError.new("Color of chess piece is not valid (must be :white or :black)") unless [:black, :white].include?(color)
+    raise ArgumentError.new("Position of chess piece is not a valid chessboard position") unless position =~ /^[A-H][1-8]$/
 
     @color = color
     @position = position
     @move_dirs = Array.new
-    @num_moves = 0
+    @move_count = 0
   end
 
   def move
-    @num_moves += 1
+    @move_count += 1
   end
 
   def attack_moves
@@ -30,16 +29,18 @@ class Piece
     moves = @move_dirs
     moves = @attack_move_dirs if attack
 
-    moves.each do |move|
+    move_dirs.each do |move_dir|
       next_move = loc.dup
+
       loop do
-        next_move = [next_move[0]+move[0], next_move[1] + move[1]]
+        next_move = [next_move[0]+move_dir[0], next_move[1] + move_dir[1]]
 
         break if $board.get_piece(next_move) == -1
 
         if $board.get_piece(next_move).nil?
           output.push(next_move.dup) unless attack
           next if @repeat_move
+
         elsif $board.get_piece(next_move).color != @color && attack
           output.push(next_move.dup)
         end
