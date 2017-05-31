@@ -14,11 +14,13 @@ board[0][4] = Rook.new(:black, "A5")
 board[0][7] = Rook.new(:black, "A8")
 board[1][0] = Knight.new(:white, "B1")
 board[1][1] = Pawn.new(:white, "B2")
+board[1][2] = Pawn.new(:black, "B3")
 board[2][2] = Pawn.new(:black, "C3")
 board[3][0] = Queen.new(:white, "D1")
 board[3][7] = Queen.new(:black, "D8")
 board[5][6] = Knight.new(:black, "F7")
 board[6][4] = Bishop.new(:white, "G5")
+board[7][1] = Pawn.new(:white, "H2")
 board[7][4] = King.new(:black, "H5")
 board[7][5] = Pawn.new(:black, "H6")
 
@@ -117,14 +119,14 @@ describe Queen do
 
   describe '#moves' do
     it 'returns a list of valid cells to move to' do
-      expect($board.get_piece("D1").moves).to match_array([[2,0],[4,0],[5,0],[6,0],[7,0],[2,1],[1,2],[0,3],[3,1],[3,2],[3,3],[3,4],[3,5],[3,6],[4,1],[5,2],[6,3]])
+      expect($board.get_piece("D1").moves).to match_array([[2,0],[4,0],[5,0],[6,0],[7,0],[2,1],[3,1],[3,2],[3,3],[3,4],[3,5],[3,6],[4,1],[5,2],[6,3]])
       expect($board.get_piece("D8").moves).to match_array([[1,7],[2,7],[4,7],[5,7],[6,7],[7,7],[2,6],[1,5],[3,6],[3,5],[3,4],[3,3],[3,2],[3,1],[4,6],[5,5]])
     end
   end
 
   describe '#attack_moves' do
     it 'returns a list of valid cells with an opposing piece on that can be attacked' do
-      expect($board.get_piece("D1").attack_moves).to match_array([[3,7],[7,4]])
+      expect($board.get_piece("D1").attack_moves).to match_array([[3,7],[7,4],[1,2]])
       expect($board.get_piece("D8").attack_moves).to match_array([[3,0],[6,4]])
     end
   end
@@ -160,8 +162,10 @@ describe Pawn do
 
   describe '#moves' do
     it 'returns a list of valid cells to move to' do
-      expect($board.get_piece("B2").moves).to match_array([[1,2],[1,3]])
+      expect($board.get_piece("B2").moves).to match_array([])
+      expect($board.get_piece("B3").moves).to match_array([])
       expect($board.get_piece("C3").moves).to match_array([[2,1]])
+      expect($board.get_piece("H2").moves).to match_array([[7,2],[7,3]])
       expect($board.get_piece("H6").moves).to match_array([])
     end
   end
@@ -169,7 +173,9 @@ describe Pawn do
   describe '#attack_moves' do
     it 'returns a list of valid cells with an opposing piece on that can be attacked' do
       expect($board.get_piece("B2").attack_moves).to match_array([[2,2]])
+      expect($board.get_piece("B3").attack_moves).to match_array([])
       expect($board.get_piece("C3").attack_moves).to match_array([[1,1]])
+      expect($board.get_piece("H2").attack_moves).to match_array([])
       expect($board.get_piece("H6").attack_moves).to match_array([[6,4]])
     end
   end
