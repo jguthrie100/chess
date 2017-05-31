@@ -2,8 +2,9 @@
 require 'board'
 
 describe Board do
+  let(:board) { Board.new }
+
   describe '#initialize' do
-    board = Board.new
     it 'sets up a new chess board with black and white pieces' do
       expect(board.board[0][0]).to be_a(Rook)
       expect(board.board[0][0].color).to be(:white)
@@ -57,7 +58,6 @@ describe Board do
   end
 
   describe '#get_piece' do
-    board = Board.new
     it 'returns the piece in the specified location (using String identifier)' do
       expect(board.get_piece("A1")).to be_a(Rook)
       expect(board.get_piece("B1")).to be_a(Knight)

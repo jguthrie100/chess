@@ -26,8 +26,8 @@ class Piece
     loc = $board.loc_to_array(@position)
     output = Array.new
 
-    moves = @move_dirs
-    moves = @attack_move_dirs if attack
+    move_dirs = @move_dirs
+    move_dirs = @attack_move_dirs if attack
 
     move_dirs.each do |move_dir|
       next_move = loc.dup
