@@ -30,6 +30,5 @@ module Helper
         end
       end
     end
-    @board[0][2] = Pawn.new(:black, "A3")
   end
 end
