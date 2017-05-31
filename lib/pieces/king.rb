@@ -1,10 +1,11 @@
 require_relative 'piece'
 
 class King < Piece
-  
-  def initialize(color)
+
+  def initialize(color, position)
     super
-    @moves = [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]]
+    @move_dirs = [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]]
+    @attack_move_dirs = @move_dirs
     @repeat_move = false
   end
 end

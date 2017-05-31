@@ -16,17 +16,17 @@ module Helper
       end
 
       if row_num == 0 || row_num == 7
-        @board[row_num][0] = Rook.new(color)
-        @board[row_num][1] = Knight.new(color)
-        @board[row_num][2] = Bishop.new(color)
-        @board[row_num][3] = Queen.new(color)
-        @board[row_num][4] = King.new(color)
-        @board[row_num][5] = Bishop.new(color)
-        @board[row_num][6] = Knight.new(color)
-        @board[row_num][7] = Rook.new(color)
+        @board[0][row_num] = Rook.new(color, "A#{row_num+1}")
+        @board[1][row_num] = Knight.new(color, "B#{row_num+1}")
+        @board[2][row_num] = Bishop.new(color, "C#{row_num+1}")
+        @board[3][row_num] = Queen.new(color, "D#{row_num+1}")
+        @board[4][row_num] = King.new(color, "E#{row_num+1}")
+        @board[5][row_num] = Bishop.new(color, "F#{row_num+1}")
+        @board[6][row_num] = Knight.new(color, "G#{row_num+1}")
+        @board[7][row_num] = Rook.new(color, "H#{row_num+1}")
       elsif row_num == 1 || row_num == 6
-        @board[row_num].length.times do |i|
-          @board[row_num][i] = Pawn.new(color)
+        @board.length.times do |col_num|
+          @board[col_num][row_num] = Pawn.new(color, "#{(col_num+65).chr}#{row_num+1}")
         end
       end
     end
